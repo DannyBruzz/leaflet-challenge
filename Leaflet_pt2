@@ -25,8 +25,7 @@ function createMap(data) {
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
-    createLegend(myMap);
-  }
+    }
     
     d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson").then(createMarkers);
     
@@ -46,8 +45,7 @@ function createMap(data) {
             let geometry = row.geometry;
             let Fcolor = "";
             let depth = geometry.coordinates[2];
-            console.log(depth);
-            console.log(details.mag);
+
             if (depth > 90) {
               Fcolor = "black";
             }
@@ -87,27 +85,12 @@ function createMap(data) {
                 color: "white",
                 fillColor: Fcolor,
                 radius: radiusValue
-            }).bindPopup("<h3>" + details.place + "<h3><h3>Magnitude: " + details.mag + "</h3><h3>Depth (km): " + depth + "</h3>");
+            }).bindPopup("<h3>" + details.place + "<h3><h3>Magnitude: " + details.mag + "</h3><h3>Depth: " + depth + "</h3>");
             
           eqMarkers.push(earthquakesMarker);
         }
         createMap(L.layerGroup(eqMarkers));
       }
-function createLegend(map) {
-let legend = L.control({ position: "bottomright" });
 
-legend.onAdd = function(map) {
-  let div = L.DomUtil.create("div", "legend");
-  div.innerHTML += "<h4>Depth (km):</h4>";
-  div.innerHTML += '<i style="background: #FFFF00"></i><span>-10-10</span><br>';
-  div.innerHTML += '<i style="background: #FFA500"></i><span>10-30</span><br>';
-  div.innerHTML += '<i style="background: #FF0000"></i><span>30-50</span><br>';
-  div.innerHTML += '<i style="background: #EE82EE"></i><span>50-70</span><br>';
-  div.innerHTML += '<i style="background: #800080"></i><span>70-90</span><br>';
-  div.innerHTML += '<i style="background: #000000"></i><span>90+</span><br>';
-
-  return div;
-};
-
-legend.addTo(map);
-}
+ let test = L.geoJson('PB2002_boundaries.json');
+ console.log(test)
