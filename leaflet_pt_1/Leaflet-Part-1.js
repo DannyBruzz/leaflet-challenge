@@ -32,14 +32,8 @@ function createMap(data) {
     
     
     function createMarkers(response) {
-    
-        // Pull the "stations" property from response.data.
         let earthquakes = response.features;
-      
-        // Initialize an array to hold bike markers.
         let eqMarkers = [];
-      
-        // Loop through the stations array.
         for (let i = 0; i < earthquakes.length; i++) {  
             let row = earthquakes[i];
             let details = row.properties;
